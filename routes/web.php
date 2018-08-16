@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/products', ['uses' => 'ProductsController@index', 'as' => 'allProducts' ]);
+Route::get('products', ['uses' => 'ProductsController@index', 'as' => 'allProducts' ]);
 
 Route::get('product/addToCart/{id}', ['uses' => 'ProductsController@addProductToCart', 'as' => 'AddToCartProduct' ]);
 
-Route::get('/cart', ['uses' => 'ProductsController@showCart', 'as' => 'cartproducts' ]);
+Route::get('cart', ['uses' => 'ProductsController@showCart', 'as' => 'cartproducts' ]);
+
+Route::get('product/deleteItemFromCart/{id}', ['uses' => 'ProductsController@deleteItemFromCart', 'as' => 'DeleteItemFromCart' ]);

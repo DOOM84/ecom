@@ -50,4 +50,20 @@ class Cart
 
     }
 
+    public function updatePriceAndQuantity()
+    {
+
+        $totalPrice = 0;
+        $totalQuantity = 0;
+        foreach ($this->items as $item) {
+            $totalQuantity = $totalQuantity + $item['quantity'];
+            $totalPrice = $totalPrice + $item['totalSinglePrice'];
+        }
+
+        $this->totalQuantity = $totalQuantity;
+        $this->totalPrice = $totalPrice;
+
+
+    }
+
 }
