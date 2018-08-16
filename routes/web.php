@@ -22,3 +22,9 @@ Route::get('product/addToCart/{id}', ['uses' => 'ProductsController@addProductTo
 Route::get('cart', ['uses' => 'ProductsController@showCart', 'as' => 'cartproducts' ]);
 
 Route::get('product/deleteItemFromCart/{id}', ['uses' => 'ProductsController@deleteItemFromCart', 'as' => 'DeleteItemFromCart' ]);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('admin/products', ['uses' => 'Admin\AdminProductsController@index', 'as' => 'adminDisplayProducts' ]);
