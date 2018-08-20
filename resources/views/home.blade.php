@@ -17,6 +17,10 @@
                     You are logged in!
                     <p>Name: {!! Auth::user()->name !!}</p>
                     <p>Email: {!! Auth::user()->email !!}</p>
+                    <a class="btn btn-primary" href="{{route('allProducts')}}">Main Website</a>
+                        @if($userData->isAdmin())
+                    <a class="btn btn-warning" href="{{route('adminDisplayProducts')}}">Dashboard</a>
+                    @endif
                 </div>
             </div>
         </div>

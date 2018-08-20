@@ -11,7 +11,7 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(3);
 
         return view('allproducts', compact('products'));
     }
@@ -62,5 +62,26 @@ class ProductsController extends Controller
 
         return redirect()->route('cartproducts');
 
+    }
+
+    public function menProducts()
+    {
+
+        $products = Product::where('type', 'Men')->get();
+        return view('menProducts', compact('products'));
+
+    }
+
+    public function womenProducts ()
+    {
+        $products = Product::where('type', 'Women')->get();
+        return view('womenProducts', compact('products'));
+    }
+
+    public function search(Request $request)
+    {
+        $searchText = $request->get('searchText');
+        $products = Product::where('name', 'LIKE', $searchText.'%')->paginate(3);
+        return view('allproducts', compact('products'));
     }
 }
