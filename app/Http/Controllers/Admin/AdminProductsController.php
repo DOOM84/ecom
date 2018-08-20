@@ -93,7 +93,7 @@ class AdminProductsController extends Controller
         $name = $request->input('name');
         $description = $request->input('description');
         $type =$request->input('type');
-        $price = substr($request->input('price'),1);
+        $price = $request->input('price');
 
         Validator::make($request->all(),['image' => 'required|file|image|mimes:jpg,png,jpeg|max:5000'])->validate();
         $ext = $request->file('image')->getClientOriginalExtension();
@@ -111,12 +111,23 @@ class AdminProductsController extends Controller
 
         $created = DB::table('products')->insert($newProductArray);
 
-
         if ($created){
             return redirect()->route('adminDisplayProducts');
         }else{
             return "Product was not created";
         }
 
+    }
+
+    public function deleteProduct($id)
+    {
+       $product = Product::find($id);
+
+        $exists = Storage::disk('local')->exists('public/product_images/'.$product->image);
+        if ($exists){
+            Storage::delete('public/product_images/'.$product->image);
+        }
+       Product::destroy($id);
+        return redirect()->route('adminDisplayProducts');
     }
 }
